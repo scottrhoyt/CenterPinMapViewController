@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "SHReportAnnotation.h"
 
-@interface SHMapViewController () <MKMapViewDelegate>
+@interface SHMapViewController () <MKMapViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) SHReportAnnotation *reportAnnotaion;
@@ -48,6 +48,14 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self.mapView addAnnotation:self.reportAnnotaion];
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    panGesture.delegate = self;
+    [self.mapView addGestureRecognizer:panGesture];
+    
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    pinchGesture.delegate = self;
+    [self.mapView addGestureRecognizer:pinchGesture];
 	// Do any additional setup after loading the view.
 }
 
@@ -57,7 +65,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Gesture Recognizer Delegate Methods
+
+- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer
+{
+    self.reportAnnotaion.coordinate = self.mapView.centerCoordinate;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    //let the map view's and our gesture recognizers work at the same time...
+    return YES;
+}
+
 #pragma mark - MapView Delegate methods
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    MKCoordinateRegion region = mapView.region;
+    self.reportAnnotaion.coordinate = region.center;
+}
 
 #define PIN_REUSE_ID @"pin"
 
