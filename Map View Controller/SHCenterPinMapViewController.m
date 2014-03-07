@@ -7,12 +7,11 @@
 //
 
 #import "SHCenterPinMapViewController.h"
-#import "SHPinAnnotation.h"
 
 @interface SHCenterPinMapViewController () <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) SHPinAnnotation *centerAnnotaion;
+@property (strong, nonatomic) MKPointAnnotation *centerAnnotaion;
 @property (strong, nonatomic) MKPinAnnotationView *centerAnnotationView;
 
 @end
@@ -21,10 +20,10 @@
 
 #pragma mark - Setters/Getters
 
-- (SHPinAnnotation *)centerAnnotaion
+- (MKPointAnnotation *)centerAnnotaion
 {
     if (!_centerAnnotaion) {
-        _centerAnnotaion = [[SHPinAnnotation alloc] init];
+        _centerAnnotaion = [[MKPointAnnotation alloc] init];
     }
     
     return _centerAnnotaion;

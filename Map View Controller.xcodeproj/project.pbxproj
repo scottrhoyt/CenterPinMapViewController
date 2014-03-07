@@ -22,7 +22,6 @@
 		3B7019A818C9472C00E6DC81 /* Map_View_ControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7019A718C9472C00E6DC81 /* Map_View_ControllerTests.m */; };
 		3B7019B318C9475F00E6DC81 /* SHCenterPinMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7019B218C9475F00E6DC81 /* SHCenterPinMapViewController.m */; };
 		3B7019B518C947B300E6DC81 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7019B418C947B300E6DC81 /* MapKit.framework */; };
-		3B7019B818C9488700E6DC81 /* SHPinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7019B718C9488700E6DC81 /* SHPinAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +55,6 @@
 		3B7019B118C9475F00E6DC81 /* SHCenterPinMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCenterPinMapViewController.h; sourceTree = "<group>"; };
 		3B7019B218C9475F00E6DC81 /* SHCenterPinMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCenterPinMapViewController.m; sourceTree = "<group>"; };
 		3B7019B418C947B300E6DC81 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3B7019B618C9488700E6DC81 /* SHPinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHPinAnnotation.h; sourceTree = "<group>"; };
-		3B7019B718C9488700E6DC81 /* SHPinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHPinAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +121,6 @@
 				3B70198018C9472C00E6DC81 /* Supporting Files */,
 				3B7019B118C9475F00E6DC81 /* SHCenterPinMapViewController.h */,
 				3B7019B218C9475F00E6DC81 /* SHCenterPinMapViewController.m */,
-				3B7019B618C9488700E6DC81 /* SHPinAnnotation.h */,
-				3B7019B718C9488700E6DC81 /* SHPinAnnotation.m */,
 			);
 			path = "Map View Controller";
 			sourceTree = "<group>";
@@ -261,7 +256,6 @@
 			files = (
 				3B7019B318C9475F00E6DC81 /* SHCenterPinMapViewController.m in Sources */,
 				3B70198618C9472C00E6DC81 /* main.m in Sources */,
-				3B7019B818C9488700E6DC81 /* SHPinAnnotation.m in Sources */,
 				3B70198A18C9472C00E6DC81 /* SHAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
