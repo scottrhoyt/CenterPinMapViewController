@@ -57,6 +57,10 @@
     pinchGesture.delegate = self;
     [self.mapView addGestureRecognizer:pinchGesture];
 	// Do any additional setup after loading the view.
+    
+    MKPinAnnotationView *pan = [[MKPinAnnotationView alloc] initWithAnnotation:self.reportAnnotaion reuseIdentifier:@"oo"];
+    pan.center = self.mapView.center;
+    [self.mapView addSubview:pan];
 }
 
 - (void)didReceiveMemoryWarning

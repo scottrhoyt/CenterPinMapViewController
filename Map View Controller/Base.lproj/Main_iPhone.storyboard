@@ -16,12 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEo-x6-GnT">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEo-x6-GnT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dEo-x6-GnT" secondAttribute="trailing" id="9Sb-Mp-gDy"/>
+                            <constraint firstItem="VBw-tv-dJc" firstAttribute="top" secondItem="dEo-x6-GnT" secondAttribute="bottom" id="Oyj-5A-txV"/>
+                            <constraint firstItem="dEo-x6-GnT" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="v6v-cg-zdR"/>
+                            <constraint firstItem="dEo-x6-GnT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vXK-JR-mis"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="dEo-x6-GnT" id="gXm-bE-X3n"/>
