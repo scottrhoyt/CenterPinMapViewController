@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Wild Onion Labs. All rights reserved.
 //
 
-#import "SHReportAnnotation.h"
+#import "SHPinAnnotation.h"
 
-@implementation SHReportAnnotation
+@implementation SHPinAnnotation
 
 @end
