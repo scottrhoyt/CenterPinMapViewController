@@ -22,6 +22,9 @@
 		3B70199E18C9472C00E6DC81 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B70197D18C9472C00E6DC81 /* UIKit.framework */; };
 		3B7019A618C9472C00E6DC81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B7019A418C9472C00E6DC81 /* InfoPlist.strings */; };
 		3B7019A818C9472C00E6DC81 /* Map_View_ControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7019A718C9472C00E6DC81 /* Map_View_ControllerTests.m */; };
+		3B7019B318C9475F00E6DC81 /* SHMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7019B218C9475F00E6DC81 /* SHMapViewController.m */; };
+		3B7019B518C947B300E6DC81 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7019B418C947B300E6DC81 /* MapKit.framework */; };
+		3B7019B818C9488700E6DC81 /* SHReportAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7019B718C9488700E6DC81 /* SHReportAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,11 @@
 		3B7019A318C9472C00E6DC81 /* Map View ControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Map View ControllerTests-Info.plist"; sourceTree = "<group>"; };
 		3B7019A518C9472C00E6DC81 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B7019A718C9472C00E6DC81 /* Map_View_ControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Map_View_ControllerTests.m; sourceTree = "<group>"; };
+		3B7019B118C9475F00E6DC81 /* SHMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMapViewController.h; sourceTree = "<group>"; };
+		3B7019B218C9475F00E6DC81 /* SHMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMapViewController.m; sourceTree = "<group>"; };
+		3B7019B418C947B300E6DC81 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3B7019B618C9488700E6DC81 /* SHReportAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHReportAnnotation.h; sourceTree = "<group>"; };
+		3B7019B718C9488700E6DC81 /* SHReportAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHReportAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B7019B518C947B300E6DC81 /* MapKit.framework in Frameworks */,
 				3B70197C18C9472C00E6DC81 /* CoreGraphics.framework in Frameworks */,
 				3B70197E18C9472C00E6DC81 /* UIKit.framework in Frameworks */,
 				3B70197A18C9472C00E6DC81 /* Foundation.framework in Frameworks */,
@@ -103,6 +112,7 @@
 		3B70197818C9472C00E6DC81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B7019B418C947B300E6DC81 /* MapKit.framework */,
 				3B70197918C9472C00E6DC81 /* Foundation.framework */,
 				3B70197B18C9472C00E6DC81 /* CoreGraphics.framework */,
 				3B70197D18C9472C00E6DC81 /* UIKit.framework */,
@@ -122,6 +132,10 @@
 				3B70199218C9472C00E6DC81 /* SHViewController.m */,
 				3B70199418C9472C00E6DC81 /* Images.xcassets */,
 				3B70198018C9472C00E6DC81 /* Supporting Files */,
+				3B7019B118C9475F00E6DC81 /* SHMapViewController.h */,
+				3B7019B218C9475F00E6DC81 /* SHMapViewController.m */,
+				3B7019B618C9488700E6DC81 /* SHReportAnnotation.h */,
+				3B7019B718C9488700E6DC81 /* SHReportAnnotation.m */,
 			);
 			path = "Map View Controller";
 			sourceTree = "<group>";
@@ -254,7 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B7019B318C9475F00E6DC81 /* SHMapViewController.m in Sources */,
 				3B70198618C9472C00E6DC81 /* main.m in Sources */,
+				3B7019B818C9488700E6DC81 /* SHReportAnnotation.m in Sources */,
 				3B70199318C9472C00E6DC81 /* SHViewController.m in Sources */,
 				3B70198A18C9472C00E6DC81 /* SHAppDelegate.m in Sources */,
 			);
