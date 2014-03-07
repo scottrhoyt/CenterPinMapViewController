@@ -7,7 +7,6 @@
 //
 
 #import "SHCenterPinMapViewController.h"
-#import <MapKit/MapKit.h>
 #import "SHPinAnnotation.h"
 
 @interface SHCenterPinMapViewController () <MKMapViewDelegate>
@@ -54,6 +53,11 @@
     }
     
     return _centerAnnotationView;
+}
+
+- (CLLocationCoordinate2D)centerCoordinate
+{
+    return self.mapView.centerCoordinate;
 }
 
 #pragma mark - View Controller Lifecycle

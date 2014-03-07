@@ -20,15 +20,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFu-lo-zlO">
-                                <rect key="frame" x="181" y="527" width="119" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFu-lo-zlO">
+                                <rect key="frame" x="258" y="539" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWf-Mv-5H2">
-                                <rect key="frame" x="20" y="527" width="119" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWf-Mv-5H2">
+                                <rect key="frame" x="20" y="539" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -36,8 +36,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MFu-lo-zlO" secondAttribute="trailing" constant="20" symbolic="YES" id="15p-ph-aUk"/>
                             <constraint firstAttribute="trailing" secondItem="dEo-x6-GnT" secondAttribute="trailing" id="9Sb-Mp-gDy"/>
+                            <constraint firstItem="VBw-tv-dJc" firstAttribute="top" secondItem="dEo-x6-GnT" secondAttribute="bottom" id="Aql-ij-haY"/>
+                            <constraint firstItem="AWf-Mv-5H2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="EUv-ch-Yyk"/>
+                            <constraint firstItem="VBw-tv-dJc" firstAttribute="top" secondItem="AWf-Mv-5H2" secondAttribute="bottom" constant="20" symbolic="YES" id="Fwf-YZ-e53"/>
+                            <constraint firstItem="VBw-tv-dJc" firstAttribute="top" secondItem="MFu-lo-zlO" secondAttribute="bottom" constant="20" symbolic="YES" id="Gad-3r-ow4"/>
+                            <constraint firstItem="dEo-x6-GnT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="M0B-LL-cta"/>
                             <constraint firstItem="VBw-tv-dJc" firstAttribute="top" secondItem="dEo-x6-GnT" secondAttribute="bottom" id="Oyj-5A-txV"/>
+                            <constraint firstAttribute="trailing" secondItem="dEo-x6-GnT" secondAttribute="trailing" id="bTk-XV-7Cd"/>
+                            <constraint firstItem="dEo-x6-GnT" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="gkV-ci-V6y"/>
                             <constraint firstItem="dEo-x6-GnT" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="v6v-cg-zdR"/>
                             <constraint firstItem="dEo-x6-GnT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vXK-JR-mis"/>
                         </constraints>

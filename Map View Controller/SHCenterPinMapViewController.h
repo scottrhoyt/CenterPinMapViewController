@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface SHCenterPinMapViewController : UIViewController
+
+@property (nonatomic, readonly) CLLocationCoordinate2D centerCoordinate;
 
 @end
