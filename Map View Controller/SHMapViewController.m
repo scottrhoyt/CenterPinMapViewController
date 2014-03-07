@@ -89,10 +89,17 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    MKPinAnnotationView *pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:PIN_REUSE_ID];
-    pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
-    
-    return pinAnnotationView;
+    if ([annotation isKindOfClass:[SHReportAnnotation class]]) {
+        MKPinAnnotationView *pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:PIN_REUSE_ID];
+        pinAnnotationView.pinColor = MKPinAnnotationColorGreen;
+        
+        return pinAnnotationView;
+    }
+    else
+    {
+        return [mapView viewForAnnotation:annotation];
+    }
+
 }
 
 @end
