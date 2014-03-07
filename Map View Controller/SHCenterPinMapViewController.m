@@ -14,26 +14,12 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) SHPinAnnotation *centerAnnotaion;
 @property (strong, nonatomic) MKPinAnnotationView *centerAnnotationView;
-@property (strong, nonatomic) UIView *testView;
-@property (weak, nonatomic) IBOutlet UILabel *latLabel;
-@property (weak, nonatomic) IBOutlet UILabel *longLabel;
 
 @end
 
 @implementation SHCenterPinMapViewController
 
 #pragma mark - Setters/Getters
-
-- (UIView *)testView
-{
-    if (!_testView) {
-        _testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 5)];
-        _testView.backgroundColor = [UIColor orangeColor];
-        _testView.alpha = 0.6;
-    }
-    
-    return _testView;
-}
 
 - (SHPinAnnotation *)centerAnnotaion
 {
@@ -67,7 +53,6 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self.mapView addSubview:self.centerAnnotationView];
-    [self.mapView addSubview:self.testView];
 }
 
 #define PIN_WIDTH_OFFSET 7.75
@@ -86,7 +71,6 @@
 {
     [super viewDidAppear:animated];
     [self moveMapAnnotationToCoordinate:self.mapView.centerCoordinate];
-    self.testView.center = self.mapView.center;
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,8 +86,6 @@
 {
     self.centerAnnotaion.coordinate = mapView.centerCoordinate;
     [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
-    self.latLabel.text = [NSString stringWithFormat:@"%f", self.mapView.centerCoordinate.latitude];
-    self.longLabel.text = [NSString stringWithFormat:@"%f", self.mapView.centerCoordinate.longitude];
 }
 
 @end
