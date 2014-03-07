@@ -40,9 +40,29 @@
     return _centerAnnotationView;
 }
 
-- (CLLocationCoordinate2D)centerCoordinate
+- (CLLocationCoordinate2D)selectedCoordinate
 {
     return self.mapView.centerCoordinate;
+}
+
+#define DEFAULT_INITIAL_SIZE 1000
+
+- (NSUInteger)initialMapSize
+{
+    if (!_initialMapSize) {
+        _initialMapSize = DEFAULT_INITIAL_SIZE;
+    }
+    
+    return _initialMapSize;
+}
+
+- (NSUInteger)zoomMapSize
+{
+    if (!_zoomMapSize) {
+        _zoomMapSize = self.initialMapSize;
+    }
+    
+    return _zoomMapSize;
 }
 
 #pragma mark - View Controller Lifecycle
@@ -52,6 +72,13 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self.mapView addSubview:self.centerAnnotationView];
+    self.zoomToUser = YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -79,6 +106,13 @@
                                                    mapViewPoint.y + yoffset);
 }
 
+//#define METERS_PER_LATITUDE 111000.0
+
+- (void)changeRegionToCoordinate:(CLLocationCoordinate2D)coordinate withSize:(NSUInteger)size
+{
+    MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance(coordinate, size, size);
+    [self.mapView setRegion:newRegion animated:YES];
+}
 
 #pragma mark - MapView Delegate methods
 
@@ -86,6 +120,14 @@
 {
     self.centerAnnotaion.coordinate = mapView.centerCoordinate;
     [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    if (self.zoomToUser) {
+        [self changeRegionToCoordinate:userLocation.coordinate withSize:self.zoomMapSize];
+        self.zoomToUser = NO;
+    }
 }
 
 @end
