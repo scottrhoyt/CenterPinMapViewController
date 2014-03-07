@@ -55,28 +55,29 @@
     [self.mapView addSubview:self.centerAnnotationView];
 }
 
-#define PIN_WIDTH_OFFSET 7.75
-#define PIN_HEIGHT_OFFSET 5
-
-- (void)moveMapAnnotationToCoordinate:(CLLocationCoordinate2D) coordinate
-{
-    CGPoint centerMapPoint = [self.mapView convertCoordinate:coordinate toPointToView:self.mapView];
-    CGFloat xoffset = CGRectGetMidX(self.centerAnnotationView.bounds) - PIN_WIDTH_OFFSET;
-    CGFloat yoffset = -CGRectGetMidY(self.centerAnnotationView.bounds) + PIN_HEIGHT_OFFSET;
-    self.centerAnnotationView.center = CGPointMake(centerMapPoint.x + xoffset,
-                                                   centerMapPoint.y + yoffset);
-}
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self moveMapAnnotationToCoordinate:self.mapView.centerCoordinate];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - main methods
+
+// These are the constants need to offset distance between the lower left corner of
+// the annotaion view and the head of the pin
+#define PIN_WIDTH_OFFSET 7.75
+#define PIN_HEIGHT_OFFSET 5
+
+- (void)moveMapAnnotationToCoordinate:(CLLocationCoordinate2D) coordinate
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    CGPoint mapViewPoint = [self.mapView convertCoordinate:coordinate toPointToView:self.mapView];
+    
+    // Offset the view from to account for distance from the lower left corner to the pin head
+    CGFloat xoffset = CGRectGetMidX(self.centerAnnotationView.bounds) - PIN_WIDTH_OFFSET;
+    CGFloat yoffset = -CGRectGetMidY(self.centerAnnotationView.bounds) + PIN_HEIGHT_OFFSET;
+    
+    self.centerAnnotationView.center = CGPointMake(mapViewPoint.x + xoffset,
+                                                   mapViewPoint.y + yoffset);
 }
 
 
