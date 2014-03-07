@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SHMapViewController : UIViewController
+@interface SHCenterPinMapViewController : UIViewController
 
 @end

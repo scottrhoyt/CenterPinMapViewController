@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Wild Onion Labs. All rights reserved.
 //
 
-#import "SHMapViewController.h"
+#import "SHCenterPinMapViewController.h"
 #import <MapKit/MapKit.h>
 #import "SHPinAnnotation.h"
 
-@interface SHMapViewController () <MKMapViewDelegate>
+@interface SHCenterPinMapViewController () <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) SHPinAnnotation *centerAnnotaion;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation SHMapViewController
+@implementation SHCenterPinMapViewController
 
 #pragma mark - Setters/Getters
 
