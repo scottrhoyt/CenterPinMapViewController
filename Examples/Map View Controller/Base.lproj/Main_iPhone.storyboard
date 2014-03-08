@@ -7,7 +7,7 @@
         <!--Center Pin Map View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="SHCenterPinMapViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="CenterPinMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fDM-0W-c4t"/>
                         <viewControllerLayoutGuide type="bottom" id="VBw-tv-dJc"/>

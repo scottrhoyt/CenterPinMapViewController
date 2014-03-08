@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface SHCenterPinMapViewController : UIViewController
+@interface CenterPinMapViewController : UIViewController
 
 ///@brief Center coordinate of the mapView
 @property (nonatomic, readonly) CLLocationCoordinate2D selectedCoordinate;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Wild Onion Labs. All rights reserved.
 //
 
-#import "SHCenterPinMapViewController.h"
+#import "CenterPinMapViewController.h"
 
-@interface SHCenterPinMapViewController () <MKMapViewDelegate>
+@interface CenterPinMapViewController () <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MKPointAnnotation *centerAnnotaion;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation SHCenterPinMapViewController
+@implementation CenterPinMapViewController
 
 #pragma mark - Setters/Getters
 
