@@ -20,7 +20,7 @@
 ///@brief The initial size, in meters, of the map's smallest dimension
 @property (nonatomic) NSUInteger initialMapSize;
 
-///@brief Tells the mapview to zoom to the user location on next location update
+///@brief Tells the mapview to zoom to the user location if known now or on next location update
 @property (nonatomic) BOOL zoomToUser;
 
 ///@brief The size, in meters, of the smallest dimension of the map after zooming to user

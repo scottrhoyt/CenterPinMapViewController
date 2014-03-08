@@ -79,7 +79,20 @@
     [self updatePointAccuracyIndicators];
 }
 
-
+- (void)setZoomToUser:(BOOL)zoomToUser
+{
+    if (zoomToUser) {
+        if (self.mapView.showsUserLocation && self.mapView.userLocation.location && !self.mapView.userLocation.updating) {
+            [self changeRegionToCoordinate:self.mapView.userLocation.location.coordinate withSize:self.zoomMapSize];
+            _zoomToUser = NO;
+        } else {
+            _zoomToUser = YES;
+        }
+    } else
+    {
+        _zoomToUser = NO;
+    }
+}
 
 #pragma mark - View Controller Lifecycle
 
