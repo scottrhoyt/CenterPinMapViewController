@@ -52,8 +52,8 @@
 		3B7019A318C9472C00E6DC81 /* Map View ControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Map View ControllerTests-Info.plist"; sourceTree = "<group>"; };
 		3B7019A518C9472C00E6DC81 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B7019A718C9472C00E6DC81 /* Map_View_ControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Map_View_ControllerTests.m; sourceTree = "<group>"; };
-		3B7019B118C9475F00E6DC81 /* SHCenterPinMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCenterPinMapViewController.h; sourceTree = "<group>"; };
-		3B7019B218C9475F00E6DC81 /* SHCenterPinMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCenterPinMapViewController.m; sourceTree = "<group>"; };
+		3B7019B118C9475F00E6DC81 /* SHCenterPinMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHCenterPinMapViewController.h; path = ../../SHCenterPinMapViewController.h; sourceTree = "<group>"; };
+		3B7019B218C9475F00E6DC81 /* SHCenterPinMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHCenterPinMapViewController.m; path = ../../SHCenterPinMapViewController.m; sourceTree = "<group>"; };
 		3B7019B418C947B300E6DC81 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -467,6 +467,7 @@
 				3B7019AD18C9472C00E6DC81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3B7019AE18C9472C00E6DC81 /* Build configuration list for PBXNativeTarget "Map View ControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +476,7 @@
 				3B7019B018C9472C00E6DC81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
