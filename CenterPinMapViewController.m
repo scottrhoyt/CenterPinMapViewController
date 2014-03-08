@@ -45,6 +45,20 @@
     return self.mapView.centerCoordinate;
 }
 
+- (void)setMapView:(MKMapView *)mapView
+{
+    // Remove ourselves as delegate to old and add to new
+    if (_mapView) {
+        _mapView.delegate = nil;
+    }
+    
+    _mapView = mapView;
+    
+    if (_mapView) {
+        mapView.delegate = self;
+    }
+}
+
 #define DEFAULT_INITIAL_SIZE 5000000
 
 - (NSUInteger)initialMapSize
@@ -99,7 +113,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mapView.delegate = self;
     [self.mapView addSubview:self.centerAnnotationView];
 }
 
