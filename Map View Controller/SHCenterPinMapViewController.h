@@ -14,8 +14,8 @@
 ///@brief Center coordinate of the mapView
 @property (nonatomic, readonly) CLLocationCoordinate2D selectedCoordinate;
 
-/////@brief The minimum number of meters per point
-//@property (nonatomic) NSUInteger pointAccuracy;
+///@brief The minimum number of meters per point. Set to 0 to disable;
+@property (nonatomic) CLLocationDistance requiredPointAccuracy;
 
 ///@brief The initial size, in meters, of the map's smallest dimension
 @property (nonatomic) NSUInteger initialMapSize;
@@ -27,12 +27,12 @@
 @property (nonatomic) NSUInteger zoomMapSize;
 
 /*!
- The method uses the value set in pointAccuracy to determine if the scale is valid.
+ The method uses the value set in requiredPointAccuracy to determine if the scale is valid.
  
 @brief Determines whether or not the map is at a valid zoom scale
 @return whether or not the map is at a valid scale
 */
-//- (BOOL)mapIsAtValidZoomScale;
+- (BOOL)mapIsAtValidZoomScale;
 
 
 /*!

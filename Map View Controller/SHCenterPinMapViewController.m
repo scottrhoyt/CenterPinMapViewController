@@ -138,6 +138,15 @@
     return sizeInMeters;
 }
 
+- (BOOL)mapIsAtValidZoomScale
+{
+    if (self.requiredPointAccuracy) {
+        return [self metersPerViewPoint] <= self.requiredPointAccuracy;
+    } else {
+        return YES;
+    }
+}
+
 #pragma mark - MapView Delegate methods
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
