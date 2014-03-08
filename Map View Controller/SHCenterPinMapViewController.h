@@ -26,4 +26,21 @@
 ///@brief The size, in meters, of the smallest dimension of the map after zooming to user
 @property (nonatomic) NSUInteger zoomMapSize;
 
+/*!
+ The method uses the value set in pointAccuracy to determine if the scale is valid.
+ 
+@brief Determines whether or not the map is at a valid zoom scale
+@return whether or not the map is at a valid scale
+*/
+//- (BOOL)mapIsAtValidZoomScale;
+
+
+/*!
+ This method determines the meters in the diagnal of a unit point rectangle at the center of the map.
+ 
+ @brief The meters per point in the MapView
+ @return meters per point
+ */
+- (CLLocationDistance)metersPerViewPoint;
+
 @end

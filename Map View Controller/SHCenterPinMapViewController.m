@@ -45,7 +45,7 @@
     return self.mapView.centerCoordinate;
 }
 
-#define DEFAULT_INITIAL_SIZE 1000
+#define DEFAULT_INITIAL_SIZE 5000000
 
 - (NSUInteger)initialMapSize
 {
@@ -56,10 +56,12 @@
     return _initialMapSize;
 }
 
+#define DEFAULT_ZOOM_SIZE 1000
+
 - (NSUInteger)zoomMapSize
 {
     if (!_zoomMapSize) {
-        _zoomMapSize = self.initialMapSize;
+        _zoomMapSize = DEFAULT_ZOOM_SIZE;
     }
     
     return _zoomMapSize;
@@ -75,10 +77,15 @@
     self.zoomToUser = YES;
 }
 
+// Default center of the map is the geographic center of the US
+#define DEFAULT_CENTER_LATTITUDE 39.8282
+#define DEFAULT_CENTER_LONGITUDE -98.5795
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(DEFAULT_CENTER_LATTITUDE, DEFAULT_CENTER_LONGITUDE),self.initialMapSize, self.initialMapSize)];
+    [self metersPerViewPoint];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -114,6 +121,23 @@
     [self.mapView setRegion:newRegion animated:YES];
 }
 
+- (CLLocationDistance)metersPerViewPoint
+{
+    CGRect comparisonRect = CGRectMake(self.mapView.center.x,
+                                       self.mapView.center.y,
+                                       1,
+                                       1);
+    MKCoordinateRegion comparisonRegion = [self.mapView convertRect:comparisonRect toRegionFromView:self.mapView];
+    CLLocationCoordinate2D comparisonCoordinate1 = CLLocationCoordinate2DMake(comparisonRegion.center.latitude - comparisonRegion.span.latitudeDelta,
+                                                                              comparisonRegion.center.longitude - comparisonRegion.span.longitudeDelta);
+    CLLocationCoordinate2D comparisonCoordinate2 = CLLocationCoordinate2DMake(comparisonRegion.center.latitude + comparisonRegion.span.latitudeDelta,
+                                                                             comparisonRegion.center.longitude + comparisonRegion.span.longitudeDelta);
+    CLLocationDistance sizeInMeters = MKMetersBetweenMapPoints(MKMapPointForCoordinate(comparisonCoordinate1),
+                                                                MKMapPointForCoordinate(comparisonCoordinate2));
+    
+    return sizeInMeters;
+}
+
 #pragma mark - MapView Delegate methods
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
@@ -127,6 +151,7 @@
     if (self.zoomToUser) {
         [self changeRegionToCoordinate:userLocation.coordinate withSize:self.zoomMapSize];
         self.zoomToUser = NO;
+        //[self metersPerViewPoint];
     }
 }
 
