@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MKPointAnnotation *centerAnnotaion;
 @property (strong, nonatomic) MKPinAnnotationView *centerAnnotationView;
+@property (strong, nonatomic) UIToolbar *toolbar;
 
 @end
 
@@ -108,6 +109,39 @@
     }
 }
 
+- (UIToolbar *)toolbar
+{
+    if (!_toolbar) {
+        _toolbar = [[UIToolbar alloc] init];
+        _toolbar.opaque = NO;
+        _toolbar.translucent = YES;
+        [_toolbar setBackgroundImage:[UIImage new]
+                    forToolbarPosition:UIBarPositionAny
+                            barMetrics:UIBarMetricsDefault];
+        [_toolbar setShadowImage:[UIImage new]
+                forToolbarPosition:UIToolbarPositionAny];
+        MKUserTrackingBarButtonItem *userTrackingButton = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapView];
+        
+        [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], userTrackingButton]];
+    }
+    
+    return _toolbar;
+}
+
+- (void)setShowUserTrackingButton:(BOOL)showUserTrackingButton
+{
+    if (_showUserTrackingButton != showUserTrackingButton) {
+        _showUserTrackingButton = showUserTrackingButton;
+        if (self.view.window) {
+            if (_showUserTrackingButton) {
+                [self initToolbarAndAdd];
+            } else {
+                [self.toolbar removeFromSuperview];
+            }
+        }
+    }
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad
@@ -124,16 +158,26 @@
 {
     [super viewWillAppear:animated];
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(DEFAULT_CENTER_LATTITUDE, DEFAULT_CENTER_LONGITUDE),self.initialMapSize, self.initialMapSize)];
-    [self metersPerViewPoint];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self moveMapAnnotationToCoordinate:self.mapView.centerCoordinate];
+    
+    if (self.showUserTrackingButton) {
+        [self initToolbarAndAdd];
+    }
 }
 
 #pragma mark - main methods
+
+- (void)initToolbarAndAdd
+{
+    self.toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+
+    [self.mapView addSubview:self.toolbar];
+}
 
 // These are the constants need to offset distance between the lower left corner of
 // the annotaion view and the head of the pin

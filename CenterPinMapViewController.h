@@ -29,6 +29,9 @@
 ///@brief Determines whether or not to display visual cues for meeting requiredPointAccuracy
 @property (nonatomic) BOOL doesDisplayPointAccuracyIndicators;
 
+///@brief Determines whether or not to show a user location tracking button
+@property (nonatomic) BOOL showUserTrackingButton;
+
 /*!
  The method uses the value set in requiredPointAccuracy to determine if the scale is valid.
  
