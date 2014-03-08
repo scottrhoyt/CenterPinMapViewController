@@ -113,8 +113,6 @@
                                                    mapViewPoint.y + yoffset);
 }
 
-//#define METERS_PER_LATITUDE 111000.0
-
 - (void)changeRegionToCoordinate:(CLLocationCoordinate2D)coordinate withSize:(NSUInteger)size
 {
     MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance(coordinate, size, size);
@@ -160,7 +158,6 @@
     if (self.zoomToUser) {
         [self changeRegionToCoordinate:userLocation.coordinate withSize:self.zoomMapSize];
         self.zoomToUser = NO;
-        //[self metersPerViewPoint];
     }
 }
 
