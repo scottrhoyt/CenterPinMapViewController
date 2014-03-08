@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+@class CenterPinMapViewController;
+
+@protocol CenterPinMapViewControllerDelegate <NSObject>
+
+@optional
+- (void)centerPinMapViewController:(CenterPinMapViewController *)sender didChangeValidZoomScaleTo:(BOOL)valid;
+
+@end
+
 @interface CenterPinMapViewController : UIViewController
 
 ///@brief Center coordinate of the mapView
@@ -31,6 +40,9 @@
 
 ///@brief Determines whether or not to show a user location tracking button
 @property (nonatomic) BOOL showUserTrackingButton;
+
+///@brief Controller's <CenterPinMapViewControllerDelegate> delegate
+@property (nonatomic, weak) id <CenterPinMapViewControllerDelegate> delegate;
 
 /*!
  The method uses the value set in requiredPointAccuracy to determine if the scale is valid.

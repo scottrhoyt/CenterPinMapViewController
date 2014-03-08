@@ -14,6 +14,7 @@
 @property (strong, nonatomic) MKPointAnnotation *centerAnnotaion;
 @property (strong, nonatomic) MKPinAnnotationView *centerAnnotationView;
 @property (strong, nonatomic) UIToolbar *toolbar;
+@property (nonatomic) BOOL lastValidZoomState;
 
 @end
 
@@ -256,9 +257,19 @@
     self.centerAnnotaion.coordinate = mapView.centerCoordinate;
     [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
     
-    if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
-        [self updatePointAccuracyIndicators];
+    BOOL currentZoomStateValid = [self mapIsAtValidZoomScale];
+    if (self.lastValidZoomState != currentZoomStateValid) {
+        self.lastValidZoomState = currentZoomStateValid;
+        if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
+            [self updatePointAccuracyIndicators];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(centerPinMapViewController:didChangeValidZoomScaleTo:)]) {
+            [self.delegate centerPinMapViewController:self didChangeValidZoomScaleTo:currentZoomStateValid];
+        }
     }
+    
+
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
