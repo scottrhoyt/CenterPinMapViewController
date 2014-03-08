@@ -26,6 +26,9 @@
 ///@brief The size, in meters, of the smallest dimension of the map after zooming to user
 @property (nonatomic) NSUInteger zoomMapSize;
 
+///@brief Determines whether or not to display visual cues for meeting requiredPointAccuracy
+@property (nonatomic) BOOL doesDisplayPointAccuracyIndicators;
+
 /*!
  The method uses the value set in requiredPointAccuracy to determine if the scale is valid.
  
@@ -33,7 +36,6 @@
 @return whether or not the map is at a valid scale
 */
 - (BOOL)mapIsAtValidZoomScale;
-
 
 /*!
  This method determines the meters in the diagnal of a unit point rectangle at the center of the map.

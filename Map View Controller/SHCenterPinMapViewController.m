@@ -67,6 +67,20 @@
     return _zoomMapSize;
 }
 
+- (void)setDoesDisplayPointAccuracyIndicators:(BOOL)doesDisplayPointAccuracyIndicators
+{
+    _doesDisplayPointAccuracyIndicators = doesDisplayPointAccuracyIndicators;
+    [self updatePointAccuracyIndicators];
+}
+
+-(void)setRequiredPointAccuracy:(CLLocationDistance)requiredPointAccuracy
+{
+    _requiredPointAccuracy = requiredPointAccuracy;
+    [self updatePointAccuracyIndicators];
+}
+
+
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad
@@ -75,6 +89,8 @@
     self.mapView.delegate = self;
     [self.mapView addSubview:self.centerAnnotationView];
     self.zoomToUser = YES;
+    self.requiredPointAccuracy = 5;
+    self.doesDisplayPointAccuracyIndicators = YES;
 }
 
 // Default center of the map is the geographic center of the US
@@ -145,12 +161,35 @@
     }
 }
 
+- (void)updatePointAccuracyIndicators
+{
+    if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
+        if ([self mapIsAtValidZoomScale]) {
+            self.mapView.layer.borderColor = [UIColor greenColor].CGColor;
+            self.mapView.layer.borderWidth = 3;
+        } else {
+            self.mapView.layer.borderColor = [UIColor redColor].CGColor;
+            self.mapView.layer.borderWidth = 3;
+        }
+    }
+    else
+    {
+        self.mapView.layer.borderWidth = 0;
+    }
+
+}
+
 #pragma mark - MapView Delegate methods
+
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     self.centerAnnotaion.coordinate = mapView.centerCoordinate;
     [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
+    
+    if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
+        [self updatePointAccuracyIndicators];
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
