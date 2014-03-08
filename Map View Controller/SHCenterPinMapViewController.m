@@ -88,9 +88,6 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     [self.mapView addSubview:self.centerAnnotationView];
-    self.zoomToUser = YES;
-    self.requiredPointAccuracy = 5;
-    self.doesDisplayPointAccuracyIndicators = YES;
 }
 
 // Default center of the map is the geographic center of the US
@@ -161,15 +158,17 @@
     }
 }
 
+#define INDICATOR_BORDER_WIDTH 5
+
 - (void)updatePointAccuracyIndicators
 {
     if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
         if ([self mapIsAtValidZoomScale]) {
             self.mapView.layer.borderColor = [UIColor greenColor].CGColor;
-            self.mapView.layer.borderWidth = 3;
+            self.mapView.layer.borderWidth = INDICATOR_BORDER_WIDTH;
         } else {
             self.mapView.layer.borderColor = [UIColor redColor].CGColor;
-            self.mapView.layer.borderWidth = 3;
+            self.mapView.layer.borderWidth = INDICATOR_BORDER_WIDTH;
         }
     }
     else
