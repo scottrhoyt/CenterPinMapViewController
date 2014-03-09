@@ -15,6 +15,7 @@
 @property (strong, nonatomic) MKPinAnnotationView *centerAnnotationView;
 @property (strong, nonatomic) UIToolbar *toolbar;
 @property (nonatomic) BOOL lastValidZoomState;
+@property (nonatomic, strong) CLGeocoder *geocoder;
 
 @end
 
@@ -143,6 +144,15 @@
     }
 }
 
+- (CLGeocoder *)geocoder
+{
+    if (!_geocoder) {
+        _geocoder = [[CLGeocoder alloc] init];
+    }
+    
+    return _geocoder;
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad
@@ -249,12 +259,70 @@
 
 }
 
+- (CLLocation *)locationForCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    CLLocation *location = [[CLLocation alloc] initWithCoordinate:coordinate
+                                                         altitude:0
+                                               horizontalAccuracy:1
+                                                 verticalAccuracy:1
+                                                        timestamp:[NSDate date]];
+    
+    return location;
+}
+
+- (void)reverseGeoCodeAfterTimer:(NSTimer *)timer
+{
+    CLLocation *location = (CLLocation *)timer.userInfo;
+    
+    // If we are still at the same location after the delay, reverse geocod
+    if ((location.coordinate.latitude == self.selectedCoordinate.latitude) &&
+        (location.coordinate.longitude == self.selectedCoordinate.longitude)) {
+        CLGeocodeCompletionHandler handler = ^(NSArray *placemark, NSError *error){
+            if (error) {
+                NSLog(@"Error in geocode request. Error message: %@", error);
+            }
+            else
+            {
+                // If there is atleast one placemark, set the selected placemark and call delegate
+                if (placemark && ([placemark count] > 0)) {
+                    self.selectedPlacemark = placemark[0];
+                    NSLog(@"Reverse location name: %@", self.selectedPlacemark.name);
+                    if ([self.delegate respondsToSelector:@selector(centerPinMapViewController:didResolvePlacemark:)]) {
+                        // Notify delegate on main thread
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate centerPinMapViewController:self didResolvePlacemark:placemark[0]];
+                        });
+                    }
+                }
+            }
+        };
+        [self.geocoder reverseGeocodeLocation:location completionHandler:handler];
+    }
+}
+
 #pragma mark - MapView Delegate methods
 
+#define REVERSE_GEOCODE_DELAY 2.0
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-    self.centerAnnotaion.coordinate = mapView.centerCoordinate;
+    // If the center coordinate has changed, invalidate last geocoding result
+    if ((self.centerAnnotaion.coordinate.latitude) != (self.mapView.centerCoordinate.latitude) ||
+        (self.centerAnnotaion.coordinate.longitude != (self.mapView.centerCoordinate.longitude))) {
+        
+        self.centerAnnotaion.coordinate = mapView.centerCoordinate;
+        self.selectedPlacemark = nil;
+        
+        // Schedule geocode if enabled
+        if (self.shouldReverseGeocode) {
+            [NSTimer scheduledTimerWithTimeInterval:REVERSE_GEOCODE_DELAY
+                                             target:self selector:@selector(reverseGeoCodeAfterTimer:)
+                                           userInfo:[self locationForCoordinate:self.selectedCoordinate]
+                                            repeats:NO];
+        }
+        
+    }
+    
     [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
     
     BOOL currentZoomStateValid = [self mapIsAtValidZoomScale];

@@ -15,6 +15,7 @@
 
 @optional
 - (void)centerPinMapViewController:(CenterPinMapViewController *)sender didChangeValidZoomScaleTo:(BOOL)valid;
+- (void)centerPinMapViewController:(CenterPinMapViewController *)sender didResolvePlacemark:(CLPlacemark *)placemark;
 
 @end
 
@@ -43,6 +44,12 @@
 
 ///@brief Controller's <CenterPinMapViewControllerDelegate> delegate
 @property (nonatomic, weak) id <CenterPinMapViewControllerDelegate> delegate;
+
+///@brief Set's whether to reverse geocode the selected coordinate
+@property (nonatomic) BOOL shouldReverseGeocode;
+
+///@brief The currect reverse goecoded placemark (must enable shouldReverseGeocode)
+@property (nonatomic, strong) CLPlacemark *selectedPlacemark;
 
 /*!
  The method uses the value set in requiredPointAccuracy to determine if the scale is valid.
