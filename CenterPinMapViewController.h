@@ -45,7 +45,7 @@
 ///@brief Controller's <CenterPinMapViewControllerDelegate> delegate
 @property (nonatomic, weak) id <CenterPinMapViewControllerDelegate> delegate;
 
-///@brief Set's whether to reverse geocode the selected coordinate
+///@brief Set's whether to reverse geocode the selected coordinate (only at valid zoom scales)
 @property (nonatomic) BOOL shouldReverseGeocode;
 
 ///@brief The currect reverse goecoded placemark (must enable shouldReverseGeocode)
