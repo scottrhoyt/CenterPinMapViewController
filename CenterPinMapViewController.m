@@ -306,6 +306,8 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
+        BOOL currentZoomStateValid = [self mapIsAtValidZoomScale];
+    
     // If the center coordinate has changed, invalidate last geocoding result
     if ((self.centerAnnotaion.coordinate.latitude) != (self.mapView.centerCoordinate.latitude) ||
         (self.centerAnnotaion.coordinate.longitude != (self.mapView.centerCoordinate.longitude))) {
@@ -313,8 +315,8 @@
         self.centerAnnotaion.coordinate = mapView.centerCoordinate;
         self.selectedPlacemark = nil;
         
-        // Schedule geocode if enabled
-        if (self.shouldReverseGeocode) {
+        // Schedule geocode if enabled and zoom is valid
+        if (self.shouldReverseGeocode && currentZoomStateValid) {
             [NSTimer scheduledTimerWithTimeInterval:REVERSE_GEOCODE_DELAY
                                              target:self selector:@selector(reverseGeoCodeAfterTimer:)
                                            userInfo:[self locationForCoordinate:self.selectedCoordinate]
@@ -325,7 +327,6 @@
     
     [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
     
-    BOOL currentZoomStateValid = [self mapIsAtValidZoomScale];
     if (self.lastValidZoomState != currentZoomStateValid) {
         self.lastValidZoomState = currentZoomStateValid;
         if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
