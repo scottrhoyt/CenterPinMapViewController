@@ -286,6 +286,7 @@
                 // If there is atleast one placemark, set the selected placemark and call delegate
                 if (placemark && ([placemark count] > 0)) {
                     self.selectedPlacemark = placemark[0];
+                    NSLog(@"%@", placemark);
                     NSLog(@"Reverse location name: %@", self.selectedPlacemark.name);
                     if ([self.delegate respondsToSelector:@selector(centerPinMapViewController:didResolvePlacemark:)]) {
                         // Notify delegate on main thread
