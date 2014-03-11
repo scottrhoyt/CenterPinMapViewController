@@ -51,6 +51,9 @@
 ///@brief The currect reverse goecoded placemark (must enable shouldReverseGeocode)
 @property (nonatomic, strong) CLPlacemark *selectedPlacemark;
 
+///@brief The current user location of the user
+@property (nonatomic, readonly) CLLocationCoordinate2D userCoordinate;
+
 /*!
  The method uses the value set in requiredPointAccuracy to determine if the scale is valid.
  

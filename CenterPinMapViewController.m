@@ -153,6 +153,11 @@
     return _geocoder;
 }
 
+- (CLLocationCoordinate2D)userCoordinate
+{
+    return self.mapView.userLocation.coordinate;
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad
