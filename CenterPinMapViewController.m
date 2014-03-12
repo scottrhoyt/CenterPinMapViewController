@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIToolbar *toolbar;
 @property (nonatomic) BOOL lastValidZoomState;
 @property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, readwrite) CLLocationCoordinate2D selectedCoordinate;
 
 @end
 
@@ -43,10 +44,10 @@
     return _centerAnnotationView;
 }
 
-- (CLLocationCoordinate2D)selectedCoordinate
-{
-    return self.mapView.centerCoordinate;
-}
+//- (CLLocationCoordinate2D)selectedCoordinate
+//{
+//    return self.mapView.centerCoordinate;
+//}
 
 - (void)setMapView:(MKMapView *)mapView
 {
@@ -314,25 +315,6 @@
 {
         BOOL currentZoomStateValid = [self mapIsAtValidZoomScale];
     
-    // If the center coordinate has changed, invalidate last geocoding result
-    if ((self.centerAnnotaion.coordinate.latitude) != (self.mapView.centerCoordinate.latitude) ||
-        (self.centerAnnotaion.coordinate.longitude != (self.mapView.centerCoordinate.longitude))) {
-        
-        self.centerAnnotaion.coordinate = mapView.centerCoordinate;
-        self.selectedPlacemark = nil;
-        
-        // Schedule geocode if enabled and zoom is valid
-        if (self.shouldReverseGeocode && currentZoomStateValid) {
-            [NSTimer scheduledTimerWithTimeInterval:REVERSE_GEOCODE_DELAY
-                                             target:self selector:@selector(reverseGeoCodeAfterTimer:)
-                                           userInfo:[self locationForCoordinate:self.selectedCoordinate]
-                                            repeats:NO];
-        }
-        
-    }
-    
-    [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
-    
     if (self.lastValidZoomState != currentZoomStateValid) {
         self.lastValidZoomState = currentZoomStateValid;
         if (self.doesDisplayPointAccuracyIndicators && self.requiredPointAccuracy > 0) {
@@ -344,6 +326,33 @@
         }
     }
     
+    // If the center coordinate has changed, update values
+    if ((self.centerAnnotaion.coordinate.latitude) != (self.mapView.centerCoordinate.latitude) ||
+        (self.centerAnnotaion.coordinate.longitude != (self.mapView.centerCoordinate.longitude))) {
+        
+        self.centerAnnotaion.coordinate = mapView.centerCoordinate;
+        self.selectedPlacemark = nil;
+        
+        [self moveMapAnnotationToCoordinate:mapView.centerCoordinate];
+        
+        // If the current zoom state is valid update selected values
+        if (currentZoomStateValid) {
+            self.selectedCoordinate = self.mapView.centerCoordinate;
+            
+            // Schedule geocode if enabled
+            if (self.shouldReverseGeocode) {
+                [NSTimer scheduledTimerWithTimeInterval:REVERSE_GEOCODE_DELAY
+                                                 target:self selector:@selector(reverseGeoCodeAfterTimer:)
+                                               userInfo:[self locationForCoordinate:self.selectedCoordinate]
+                                                repeats:NO];
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(centerPinMapViewController:didChangeSelectedCoordinate:)]) {
+                [self.delegate centerPinMapViewController:self didChangeSelectedCoordinate:self.mapView.centerCoordinate];
+            }
+        }
+        
+    }
 
 }
 
@@ -352,6 +361,10 @@
     if (self.zoomToUser) {
         [self changeRegionToCoordinate:userLocation.coordinate withSize:self.zoomMapSize];
         self.zoomToUser = NO;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(centerPinMapViewController:didUpdateUserLocation:)]) {
+        [self.delegate centerPinMapViewController:self didUpdateUserLocation:userLocation.location];
     }
 }
 

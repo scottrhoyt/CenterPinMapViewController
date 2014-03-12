@@ -16,6 +16,8 @@
 @optional
 - (void)centerPinMapViewController:(CenterPinMapViewController *)sender didChangeValidZoomScaleTo:(BOOL)valid;
 - (void)centerPinMapViewController:(CenterPinMapViewController *)sender didResolvePlacemark:(CLPlacemark *)placemark;
+- (void)centerPinMapViewController:(CenterPinMapViewController *)sender didChangeSelectedCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)centerPinMapViewController:(CenterPinMapViewController *)sender didUpdateUserLocation:(CLLocation *)userLocation;
 
 @end
 
